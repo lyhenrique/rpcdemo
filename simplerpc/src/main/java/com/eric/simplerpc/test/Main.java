@@ -12,6 +12,6 @@ public class Main {
     public static void main(String[] args) {
         HelloService service = new HelloServiceImpl();
         service = RpcProxy.create(service);
-        System.out.println(service.hello("my rpc"));
+        String msg = service.hello("my rpc");
     }
 }
