@@ -18,6 +18,7 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 /**
  * 自定义反射调用处理类
@@ -47,6 +48,7 @@ public class MyInvocationHandler implements InvocationHandler{
         classInfo.setMethodName(method.getName());
         classInfo.setObjects(args);
         classInfo.setTypes(method.getParameterTypes());
+        classInfo.setRequestId(UUID.randomUUID().toString());
 
         final ResultHandler resultHandler = new ResultHandler();
 

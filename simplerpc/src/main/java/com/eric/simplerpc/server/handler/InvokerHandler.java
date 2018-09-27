@@ -28,9 +28,10 @@ public class InvokerHandler extends ChannelInboundHandlerAdapter {
             clazz = classMap.get(classInfo.getClassName());
         }
 
+        String requestId = classInfo.getRequestId();
         Method method = clazz.getClass().getMethod(classInfo.getMethodName(), classInfo.getTypes());
         Object result = method.invoke(clazz, classInfo.getObjects());
-        ctx.write(result);
+        ctx.write(result + ", requestId=" + requestId);
         ctx.flush();
         ctx.close();
     }

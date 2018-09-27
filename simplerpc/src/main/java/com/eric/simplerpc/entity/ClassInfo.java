@@ -17,6 +17,8 @@ public class ClassInfo implements Serializable {
     private Class<?>[] types;
     //参数列表
     private Object[] objects;
+    //唯一请求单号
+    private String requestId;
 
     public String getClassName() {
         return className;
@@ -48,5 +50,13 @@ public class ClassInfo implements Serializable {
 
     public void setObjects(Object[] objects) {
         this.objects = objects;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 }
