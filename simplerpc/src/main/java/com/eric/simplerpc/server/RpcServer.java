@@ -1,5 +1,7 @@
 package com.eric.simplerpc.server;
 
+import com.eric.simplerpc.client.handler.MessageDecoder;
+import com.eric.simplerpc.client.handler.MessageEncoder;
 import com.eric.simplerpc.server.handler.InvokerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -42,8 +44,10 @@ public class RpcServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline()
-                                    .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
-                                    .addLast(new LengthFieldPrepender(4))
+//                                    .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
+//                                    .addLast(new LengthFieldPrepender(4))
+                                    .addLast(new MessageEncoder())
+                                    .addLast(new MessageDecoder())
                                     .addLast("encoder", new ObjectEncoder())
                                     .addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)))
                                     .addLast(new InvokerHandler());
