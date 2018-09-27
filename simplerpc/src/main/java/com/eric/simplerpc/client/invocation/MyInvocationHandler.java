@@ -26,14 +26,24 @@ public class MyInvocationHandler implements InvocationHandler{
 
     private Object target;
 
+    private Class clazz;
+
     public MyInvocationHandler(Object target) {
         this.target = target;
+    }
+
+    public MyInvocationHandler(Class clazz) {
+        this.clazz = clazz;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         ClassInfo classInfo = new ClassInfo();
-        classInfo.setClassName(target.getClass().getName());
+        if (target != null) {
+            classInfo.setClassName(target.getClass().getName());
+        } else {
+            classInfo.setClassName(clazz.getName());
+        }
         classInfo.setMethodName(method.getName());
         classInfo.setObjects(args);
         classInfo.setTypes(method.getParameterTypes());

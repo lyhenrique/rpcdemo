@@ -14,4 +14,8 @@ public class RpcProxy {
                 target.getClass().getInterfaces(), new MyInvocationHandler(target));
     }
 
+    public static <T> T create(Class clazz) {
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), new MyInvocationHandler(clazz));
+    }
+
 }
