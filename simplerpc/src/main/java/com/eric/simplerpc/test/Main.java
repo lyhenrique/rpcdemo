@@ -10,8 +10,7 @@ import com.eric.simplerpc.interfaces.impl.HelloServiceImpl;
 public class Main {
 
     public static void main(String[] args) {
-        HelloService service = new HelloServiceImpl();
-        service = RpcProxy.create(service);
-        System.out.println(service.hello("my rpc"));
+        HelloService service = RpcProxy.create(HelloServiceImpl.class);
+        String msg = service.hello("my rpc");
     }
 }
