@@ -48,8 +48,11 @@ public class RpcServer {
                                     .addLast(new LengthFieldPrepender(4))
 //                                    .addLast(new MessageEncoder())
 //                                    .addLast(new MessageDecoder())
+                                    /**二进制串反序列化*/
                                     .addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)))
+                                    /**返回消息体序列化*/
                                     .addLast("encoder", new ObjectEncoder())
+                                    /**业务处理*/
                                     .addLast(new InvokerHandler());
                         }
                     });

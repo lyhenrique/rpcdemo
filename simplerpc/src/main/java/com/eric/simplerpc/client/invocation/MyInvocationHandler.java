@@ -70,6 +70,7 @@ public class MyInvocationHandler implements InvocationHandler{
                                             .addLast(new LengthFieldPrepender(4))
 //                                    .addLast(new MessageEncoder())
 //                                    .addLast(new MessageDecoder())
+                                    /**消息体的编码序列化*/
                                     .addLast(new ObjectEncoder())
                                     .addLast(new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)))
                                     .addLast(resultHandler);
@@ -77,6 +78,7 @@ public class MyInvocationHandler implements InvocationHandler{
                     });
 
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8080).sync();
+            /**消息传输*/
             channelFuture.channel().writeAndFlush(classInfo).sync();
             channelFuture.channel().closeFuture().sync();
         } finally {

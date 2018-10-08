@@ -15,6 +15,12 @@ public class InvokerHandler extends ChannelInboundHandlerAdapter {
 
     public static Map<String, Object> classMap = new ConcurrentHashMap<String,Object>();
 
+    /**
+     * 处理逻辑
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
@@ -31,6 +37,7 @@ public class InvokerHandler extends ChannelInboundHandlerAdapter {
         String requestId = classInfo.getRequestId();
         Method method = clazz.getClass().getMethod(classInfo.getMethodName(), classInfo.getTypes());
         Object result = method.invoke(clazz, classInfo.getObjects());
+        /**二进制串传输*/
         ctx.write(result + ", requestId=" + requestId);
         ctx.flush();
         ctx.close();
