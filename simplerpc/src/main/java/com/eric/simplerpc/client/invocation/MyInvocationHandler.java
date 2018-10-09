@@ -66,8 +66,8 @@ public class MyInvocationHandler implements InvocationHandler{
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline()
-                                            .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
-                                            .addLast(new LengthFieldPrepender(4))
+                                    .addLast(new LengthFieldPrepender(4))
+                                    .addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4))
 //                                    .addLast(new MessageEncoder())
 //                                    .addLast(new MessageDecoder())
                                     /**消息体的编码序列化*/
